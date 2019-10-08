@@ -1,0 +1,31 @@
+
+use recipe;
+
+CREATE TABLE tb_user (ID_USER int(11) NOT NULL AUTO_INCREMENT,
+   EMAIL varchar(120) DEFAULT NULL,
+   PASSWORD1 varchar(250) DEFAULT NULL,
+   NAME_USER varchar(80) DEFAULT NULL,
+   USER_ENABLED decimal(1,0) DEFAULT NULL,
+   KIND_OF_USER int(11) DEFAULT NULL,
+   PRIMARY KEY (ID_USER),
+   KEY IDX_EMAIL (EMAIL)
+ );
+ 
+ CREATE TABLE tb_recipe (ID_RECIPE bigint NOT NULL AUTO_INCREMENT,
+   TITLE varchar(120) DEFAULT NULL,
+   INGREDIENTS varchar(1000) DEFAULT NULL,
+   INSTRUCTIONS varchar(2000) DEFAULT NULL,
+   IMAGE_NAME varchar(150) DEFAULT NULL,
+   IMAGE blob DEFAULT NULL,
+   MASK varchar(20) DEFAULT NULL,
+   READY_IN_MIN int(11) DEFAULT NULL,
+   SERVING int(11) DEFAULT NULL,
+   PRIMARY KEY (ID_RECIPE)
+ );
+
+delete from tb_recipe where id_recipe > 0;
+
+SELECT * FROM TB_USER;
+insert into tb_user (EMAIL, PASSWORD1, NAME_USER, USER_ENABLED, KIND_OF_USER)
+values('caiorodro@gmail.com', 'pbkdf2:sha256:50000$HcLsOBq3$fe148f7ec479aab99efe43a5f468e5a03504244ef3cb81771cdd83808e6cff12',
+'Caio Rodrigues', 1, 1);
