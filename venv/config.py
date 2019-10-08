@@ -6,7 +6,7 @@ class Config(object):
     DB_SERVER_NAME = "localhost:3306"
     DB_NAME = "Recipe"
     DB_USERNAME = "root"
-    DB_PASSWORD = "56Runna01"
+    DB_PASSWORD = "xyz"
 
     ZIP_UPLOADS = "/Users/caioDoran/Documents/Projects/DataDev/csv"
     ZIP_DOWNLOADS = '/Users/caioDoran/Documents/Projects/DataDev/csv'
@@ -27,7 +27,7 @@ class DevelopmentConfig(Config):
     DB_SERVER_NAME = "localhost:3306"
     DB_NAME = "Recipe"
     DB_USERNAME = "root"
-    DB_PASSWORD = "56Runna01"
+    DB_PASSWORD = "yyz"
 
     ZIP_UPLOADS = "/Users/caioDoran/Documents/Github/DataDev/csv"
 
@@ -39,6 +39,6 @@ class TestingConfig(Config):
     DB_SERVER_NAME = "localhost:3306"
     DB_NAME = "Recipe"
     DB_USERNAME = "root"
-    DB_PASSWORD = "56Runna01"
+    DB_PASSWORD = "yyz"
 
     SESSION_COOKIE_SECURE = False
