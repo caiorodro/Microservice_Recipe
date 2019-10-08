@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <link rel="shortcut icon" href="app/templates/assets/images/favicon.ico">
+
+    <link href="app/templates/assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="app/templates/assets/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="app/templates/assets/plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="app/templates/assets/plugins/datatables/select.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="app/templates/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="app/templates/assets/css/icons.css" rel="stylesheet" type="text/css" />
+    <link href="app/templates/assets/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="app/templates/css/util.css" rel="stylesheet" type="text/css" />
+
+    <link href="app/templates/assets/plugins/jstree/style.css" rel="stylesheet" type="text/css" />
+    <link href="app/templates/assets/plugins/switchery/switchery.min.css" rel="stylesheet" />
+
+    <link href="app/templates/assets/plugins/fileuploads/css/dropify.min.css" rel="stylesheet" type="text/css" />
+    <link href="app/templates/assets/plugins/sweet-alert/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    
+    <link href="app/templates/assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />
+
+    <script src="app/templates/assets/js/modernizr.min.js"></script>
+
+</head>
+
+<body>
+    <div class="container no-footer" id="div1" style="width: 100%;">
+        <div class="row full-row" style="height: 60px; border-bottom: 1px dotted darkgray; background-color: #1C2139;" id="divTop">
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="logo">
+                            <img src="app/templates/images/logoRecipe.png" alt="Recipe and nutrition" style="height: 50px;" />
+                            &nbsp;&nbsp;<label style="font-size: 13pt; color: white;">Recipe & nutrition survey</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-6"></div>
+                    <div class="col-sm-2">
+                        <div class="btn-group pull-right m-t-20">
+                            <button type="button" class="btn btn-custom btn-rounded dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">
+                                Settings 
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <ul class="nav nav-tabs nav-justified">
+            <li class="nav-item"><a href="#divRecipe" id="tabRecipe" data-toggle="tab" class="nav-link mdi mdi-food-apple">Recipes</a></li>
+            <li class="nav-item"><a href="#divNutrition" data-toggle="tab" class="nav-link mdi mdi-cup">Wines</a></li>
+        </ul>
+
+        <div class="tab-content b-0 mb-0">
+            <div class="tab-pane fade" id="divRecipe">
+                <div class="row full-row" style="border-bottom: 1px dotted darkgray; background-color: #EBEFF2;" >
+                    <div class="col-sm-7">
+                        <div class="row" style="border-top: 1px dotted darkgray;">
+                            <div class="col-sm-12">
+                                <div class="input-group btn-rounded">
+                                    <input type="text" id="TXT_SEARCH" class="form-control" placeholder="Search for: Japanese food" style="width: 450px;" />
+                                    <button type="button" class="btn btn-purple btn-rounded waves-effect waves-light mdi mdi-search-web">
+                                    </button>
+                                    &nbsp;&nbsp;
+                                    <button class="btn btn-purple btn-rounded waves-effect waves-light mdi mdi-hamburger" onclick="openDivRecipe();">
+                                        New recipe
+                                    </button>
+                                    <br><br>
+                                </div>
+                            </div>
+                        </div>
+                        <table id="gridRecipe" class="table table-bordered" cellspacing="0" style="width: 100%;
+                            background-color: white;">
+                            <thead>
+                                <tr>
+                                    <th style="width: 10%;">ID</th>
+                                    <th style="width: 50%;">Title</th>
+                                    <th style="width: 15%;">Ready in</th>
+                                    <th style="width: 10%;">Serving</th>
+                                    <th style="width: 15%;">Mask</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="col-sm-5">
+                        <label>Ingredients</label>
+                        <label id="LBL_INGREDIENTS" class="form-control" style="border: 1px dotted; height: 90px; overflow: auto;"></label>
+                        <br>
+                        <label>Walkthrough</label>
+                        <label id="LBL_WALKTHROUGH" class="form-control" style="border: 1px dotted; height: 150px; overflow: auto;"></label>
+                        <br>
+                        <label>Nutrients</label>
+                        <label id="LBL_NUTRIENTS" class="form-control" style="border: 1px dotted; height: 100px; overflow: auto;"></label>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <button class="btn btn-default btn-rounded mdi mdi-cup waves-effect waves-light" 
+                                    style="background: rgb(111, 71, 68); color: white; width: 100%;">
+                                    Wine pairing
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane m-t-10 fade" id="divNutrition">
+                <div class="row full-row" style="border-bottom: 1px dotted darkgray; background-color: #EBEFF2;">
+                </div>
+            </div>
+        </div>
+
+        <div id="divRegisterRecipe" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
+            aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content" style="background-color: #EBEFF2;">
+                    <div class="modal-header">
+                        <h4 class="modal-title mt-0" id="myLargeModalLabel">Create / Update a recipe</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+
+                        <form id="form1" action="#" data-parsley-validate novalidate>
+                            <div class="form-group">
+                                <input type="text" parsley-trigger="change" required 
+                                        placeholder="Title *" class="form-control" id="TXT_TITLE" />
+                            </div>
+            
+                            <div class="row">
+                                <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <textarea type="text" parsley-trigger="change" required 
+                                                    placeholder="Ingredients *" class="form-control" id="TXT_INGREDIENTS"></textarea>
+                                        </div>
+                                </div>
+                                <div class="col-sm-6">
+                                        <div class="form-group">
+                                                <textarea type="text" parsley-trigger="change" required 
+                                                        placeholder="Instructions *" class="form-control" id="TXT_INSTRUCTIONS"></textarea>
+                                            </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <input class="dropify" type="file" accept=".jpg,.jpeg,.png" id="imgFile" name="imgFile" data-height="100" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" parsley-trigger="change" required maxlength="80"
+                                    placeholder="Name of image *" class="form-control" id="TXT_NAME_IMAGE" readonly />
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <select placeholder="Mask *" class="form-control" id="CB_MASK">
+                                            <option value="ellipseMask">ellipseMask</option>
+                                            <option value="diamondMask">diamondMask</option>
+                                            <option value="starMask" selected>starMask</option>
+                                            <option value="heartMask">heartMask</option>
+                                            <option value="potMask">potMask</option>
+                                            <option value="fishMask">fishMask</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <input type="text" parsley-trigger="change" required 
+                                                placeholder="Ready in *" class="form-control" id="TXT_READY_IN_MINUTES"
+                                                name="TXT_READY_IN_MINUTES" />
+                                    </div>                
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <input type="text" parsley-trigger="change" required 
+                                                placeholder="Serving *" class="form-control" id="TXT_SERVING"
+                                                name="TXT_SERVING" />
+                                    </div>
+                                </div>   
+                            </div>
+                            
+                            <hr />
+
+                            <div class="button-group">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <button class="btn btn-danger btn-rounded waves-effect waves-light" onclick="closeDivRecipe();">
+                                            Cancel
+                                        </button>
+                                    </div>
+                                    <div class="col-8"></div>
+                                    <div class="col-2">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <button class="btn btn-primary btn-rounded waves-effect waves-light" onclick="uploadImage();">
+                                            Save
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="divLogin" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
+            aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content" style="background-color: #EBEFF2;">
+                    <div class="modal-header">
+                        <h4 class="modal-title mt-0" id="myLargeModalLabel">Login / Credentials</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-12">
+                                    <input type="text" parsley-trigger="change" required 
+                                        placeholder="e-mail *" class="form-control" id="TXT_EMAIL" />
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-12">
+                                    <input type="password" parsley-trigger="change" required 
+                                        placeholder="password *" class="form-control" id="TXT_PASSWORD" />
+                                </div>
+                            </div>
+
+                            <br>
+                            <div class="row">
+                                <div class="col-12">
+                                    <button class="btn btn-purple btn-rounded waves-effect waves-light w-100" onclick="doLogin();">
+                                        Ok
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+<script src="app/templates/assets/js/jquery.min.js"></script>
+<script src="app/templates/assets/js/popper.min.js"></script>
+<script src="app/templates/assets/js/bootstrap.min.js"></script>
+<script src="app/templates/assets/js/waves.js"></script>
+<script src="app/templates/assets/js/jquery.slimscroll.js"></script>
+<script src="app/templates/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="app/templates/assets/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="app/templates/assets/plugins/datatables/dataTables.buttons.min.js"></script>
+<script src="app/templates/assets/plugins/datatables/buttons.bootstrap4.min.js"></script>
+<script src="app/templates/assets/plugins/datatables/jszip.min.js"></script>
+<script src="app/templates/assets/plugins/datatables/pdfmake.min.js"></script>
+<script src="app/templates/assets/plugins/datatables/vfs_fonts.js"></script>
+<script src="app/templates/assets/plugins/datatables/buttons.html5.min.js"></script>
+<script src="app/templates/assets/plugins/datatables/buttons.print.min.js"></script>
+<script src="app/templates/assets/plugins/switchery/switchery.min.js"></script>
+
+<script src="app/templates/assets/plugins/datatables/dataTables.keyTable.min.js"></script>
+
+<script src="app/templates/assets/plugins/datatables/dataTables.responsive.min.js"></script>
+<script src="app/templates/assets/plugins/datatables/responsive.bootstrap4.min.js"></script>
+
+<script src="app/templates/assets/plugins/datatables/dataTables.select.min.js"></script>
+
+<script src="app/templates/assets/js/jquery.core.js"></script>
+<script src="app/templates/assets/js/jquery.app.js"></script>
+
+<script src="app/templates/assets/plugins/fileuploads/js/dropify.min.js"></script>
+
+<script src="app/templates/assets/plugins/sweet-alert/sweetalert2.min.js"></script>
+<script src="app/templates/assets/pages/jquery.sweet-alert.init.js"></script>
+
+<script src="app/templates/assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js" type="text/javascript"></script>
+
+<script src="app/templates/scripts/util.js"></script>
+
+<script type="text/javascript">
+
+    const h = window.innerHeight;
+    let idRecipe  = 0;
+    let keep;
+    let idUser = -1;
+
+    const uploadImage = () => {
+        event.preventDefault();
+
+        if (idRecipe > 0){
+            saveRecipe(idRecipe);
+            return;
+        }
+
+        fields.map((item) => {
+            if ($('#' + item).val() == '') {
+                MensagemDeErro('The fields that contains * in placeholder are required');
+                return;
+            }
+        });
+
+        const files = $("#imgFile").get(0).files;
+
+        if (files.length == 0) {
+            MensagemDeErro('Before save it, please, select an image to upload');
+            return;
+        }
+
+        const data = new FormData();
+
+        data.append($('#TXT_NAME_IMAGE').val(), files[0]);
+
+        data.append("jsonData", JSON.stringify({
+            'TITLE': $('#TXT_TITLE').val(), 
+            'INGREDIENTS': $('#TXT_INGREDIENTS').val(), 
+            'INSTRUCTIONS': $('#TXT_INSTRUCTIONS').val(), 
+            'MASK': $('#CB_MASK').val(), 
+            'READY_IN_MINUTES': $('#TXT_READY_IN_MINUTES').val(), 
+            'SERVING': $('#TXT_SERVING').val(),
+            'keep': keep,
+            'idUser': idUser
+         }));
+
+        showProcess(true);
+
+        $.ajax({
+            url: '/doUpload',
+            data: data,
+            type: 'POST',
+            success: function (response) {
+                const result = response.message;
+
+                showProcess(false);
+
+                $('.dropify-clear').click();
+
+                if (idRecipe > 0)
+                    $('#divRegisterRecipe').modal('hide');
+                else if (idRecipe == 0)
+                    clearForm();
+
+                listOfRecipes();
+            },
+            error: function (request, status, error) {
+                showProcess(false);
+                MensagemDeErro(request.responseJSON.message);
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    };
+
+    const fields = ['TXT_TITLE', 'TXT_INGREDIENTS', 'TXT_INSTRUCTIONS',
+            'TXT_NAME_IMAGE', 'CB_MASK', 'TXT_READY_IN_MINUTES', 'TXT_SERVING'];
+
+    const saveRecipe = (ID_RECIPE) => {
+        event.preventDefault();
+
+        const url = '/saveRecipe';
+
+        const data = {
+            ID_RECIPE: ID_RECIPE,
+            TITLE: $('#' + fields[0]).val(),
+            INGREDIENTS: $('#' + fields[1]).val(),
+            INSTRUCTIONS: $('#' + fields[2]).val(),
+            IMAGE_NAME: $('#' + fields[3]).val(),
+            MASK: $('#' + fields[4]).val(),
+            READY_IN_MIN: $('#' + fields[5]).val(),
+            SERVING: $('#' + fields[6]).val(),
+            keep: keep,
+            idUser: idUser
+        };
+
+        const success = function (response) {
+            const data1 = JSON.parse(response);
+
+            if (idRecipe > 0)
+                closeDivRecipe();
+            else if (idRecipe == 0)
+                clearForm();
+        };
+
+        doranAjax(url, data, success);
+    };
+
+    const clearForm = () => {
+        idRecipe = 0;
+
+        const fieldsToClear = fields.filter((item) => {
+            return item != 'CB_MASK';
+        });
+
+        console.log(fieldsToClear);
+
+        fieldsToClear.map((item) => {
+            const ctrl = $('#' + item);
+            ctrl.val('');
+        });
+    };
+
+    const listOfRecipes = () => {
+        const url = '/listOfRecipes';
+
+        const data = {
+            TITLE: '',
+            keep: keep,
+            idUser: idUser
+        };
+
+        const success = function (response) {
+            const data = eval(response);
+
+            refreshGrid(data);
+        };
+
+        doranAjax(url, data, success);
+    };
+
+    let grid1;
+
+    const refreshGrid = (data) => {
+        const _height = parseInt(h * .45);
+
+        if (grid1) {
+            $('#gridRecipe').DataTable().clear().destroy();
+            grid1 = undefined;
+        }
+
+        grid1 = $('#gridRecipe').DataTable({
+            data: data,
+            scrollY: _height,
+            searching: true,
+            pageLength: 50,
+            select: {
+                style: 'single'
+            },
+            language: ptBr
+        });
+
+        grid1.on('select', function (e, dt, type, indexes) {
+            if (type === 'row') {
+                
+            }
+        });
+    };
+
+    const openLogin = () => {
+        $('#divLogin').modal();
+    };
+
+    const doLogin = () => {
+        const url = '/authenticateUser';
+
+        const data = {
+            EMAIL: $('#TXT_EMAIL').val(),
+            PASSWORD: $('#TXT_PASSWORD').val(),
+            idUser: idUser
+        };
+
+        const success = function (response) {
+            keep = response.message[0];
+            idUser = parseInt(response.message[1]);
+
+            $('#divLogin').modal('hide');
+
+            listOfRecipes();
+        };
+
+        doranAjax(url, data, success);
+    };
+
+    const openDivRecipe = () => {
+        $('#divRegisterRecipe').modal();
+    };
+
+    const closeDivRecipe = () => {
+        $('#divRegisterRecipe').modal('hide');
+    };
+
+    $('.dropify').dropify({
+        messages: {
+            'default': 'Arraste e solte os arquivos aqui ',
+            'replace': 'Arraste e solte ou clique para trocar os arquivos',
+            'remove': 'Remover',
+            'error': 'Erro'
+        },
+        error: {
+            'fileSize': 'O tamanho do arquivo está maior que 150Mb.'
+        }
+    });
+
+    const aplySpinner = (ctrlId, min, max, postfix, decimals) => {
+        $("input[name='" + ctrlId + "']").TouchSpin({
+            min: min,
+            max: max,
+            step: 1,
+            decimals: decimals,
+            boostat: 5,
+            maxboostedstep: 10,
+            buttondown_class: "btn btn-primary",
+            buttonup_class: "btn btn-primary",
+            postfix: postfix
+        });
+    };
+
+    $(document).ready(() => {
+        const _h = h - 60;
+
+        $('#tabRecipe').click();
+
+        aplySpinner('TXT_READY_IN_MINUTES', 1, 10000, 'minutes', 0);
+        aplySpinner('TXT_SERVING', 1, 100, 'persons', 0);
+
+        $('#imgFile').change((e) => {
+            const fileName = e.target.files[0].name;
+            $('#TXT_NAME_IMAGE').val(fileName);
+        });
+
+        $('#TXT_PASSWORD').keyup((e) => {
+            if (event.which == 13) {
+                doLogin();
+            }
+        });
+
+        openLogin();
+
+        setTimeout(() => {
+            $('#TXT_EMAIL').focus();
+        }, 500);
+    });
+
+</script>
