@@ -66,7 +66,7 @@
                             <div class="col-sm-12">
                                 <div class="input-group btn-rounded">
                                     <input type="text" id="TXT_SEARCH" class="form-control" placeholder="Search for: Japanese food" style="width: 450px;" />
-                                    <button type="button" class="btn btn-purple btn-rounded waves-effect waves-light mdi mdi-search-web">
+                                    <button type="button" class="btn btn-purple btn-rounded waves-effect waves-light mdi mdi-search-web" onclick="listOfRecipes();">
                                     </button>
                                     &nbsp;&nbsp;
                                     <button class="btn btn-purple btn-rounded waves-effect waves-light mdi mdi-hamburger" onclick="openDivRecipe();">
@@ -407,6 +407,39 @@
             const ctrl = $('#' + item);
             ctrl.val('');
         });
+    };
+
+    const getRecipe = (ID_RECIPE) => {
+        idRecipe = ID_RECIPE
+
+        event.preventDefault();
+
+        const url = '/getRecipe';
+        const data = { 
+            ID_RECIPE: ID_RECIPE, 
+            keep: keep,
+            idUser: idUser
+        };
+
+        const success = function (response) {
+            const data1 = eval(eval(response).message)[0];
+
+            $('#TXT_TITLE').val(data1.TITLE);
+            $('#TXT_INGREDIENTS').val(data1.INGREDIENTS);
+            $('#TXT_INSTRUCTIONS').val(data1.INSTRUCTIONS);
+            $('#TXT_IMAGE_NAME').val(data1.IMAGE_NAME);
+            $('#CB_MASK').val(data1.MASK);
+            $('#TXT_READY_IN_MINUTES').val(data1.READY_IN_MIN);
+            $('#TXT_SERVING').val(data1.SERVING);
+
+            openDivRecipe();
+
+            setTimeout(() => {
+                $('#TXT_TITLE').focus();
+            }, 500);
+        }
+
+        doranAjax(url, data, success);
     };
 
     const listOfRecipes = () => {
