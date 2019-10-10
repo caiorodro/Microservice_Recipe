@@ -21,10 +21,11 @@ class recipe(qBase, unittest.TestCase):
         self.__loggerNoSQL = loggerNoSQL()
         self.__idUser = idUser
         self.__lista1 = []
+        self.__recipe = None
         self.qBase = qBase()
 
     def listOfRecipes(self, title=None):
-        btnEdit = '<button class="btn btn-primary waves-effect waves-light btn-sm m-b-5" onclick="edit({});" title="Edit"><i class="ti-pencil"></i></button>'
+        btnEdit = '<button class="btn btn-primary waves-effect waves-light btn-sm m-b-5" onclick="getRecipe({});" title="Edit"><i class="ti-pencil"></i></button>'
         btnDelete = '<button class="btn btn-danger waves-effect waves-light btn-sm m-b-5" onclick="delete({});" title="Delete"><i class="ti-trash"></i></button>'
 
         select1 = ctx.session.query(
@@ -37,8 +38,6 @@ class recipe(qBase, unittest.TestCase):
         if title is not None:
             select1 = select1.filter(ctx.mapRecipe.TITLE.like('%{}%'.format(title)))
 
-        select1 = select1.all()
-
         self.__lista1 = []
 
         [(self.__lista1.append((row.ID_RECIPE,
@@ -47,13 +46,13 @@ class recipe(qBase, unittest.TestCase):
             row.SERVING,
             row.MASK,
             btnEdit.format(str(row.ID_RECIPE)), 
-            btnDelete.format(str(row.ID_RECIPE))))) for row in select1]
+            btnDelete.format(str(row.ID_RECIPE))))) for row in select1.all()]
 
         return len(self.__lista1)
 
     def saveImage(self, recipeMap=mapRecipe, content=bytes):
         """
-        Save recipe image on table and returns Id od created record
+        Save recipe image on table and returns Id of created record
 
         Parameters: recipeMap -> mapRecipe table. See the app.base.mapTable.py on mapRecipe class
         """
@@ -131,6 +130,35 @@ class recipe(qBase, unittest.TestCase):
         except Exception as ex:
             ctx.session.rollback()
             raise Exception(ex.args[0])
+
+    def getRecipe(self, ID_RECIPE):
+
+        self.__recipe = None
+
+        def testIt():
+            _table = ctx.mapRecipe
+
+            select1 = ctx.session.query(
+                _table.ID_RECIPE,
+                _table.TITLE,
+                _table.INGREDIENTS,
+                _table.INSTRUCTIONS,
+                _table.IMAGE_NAME,
+                _table.MASK,
+                _table.READY_IN_MIN,
+                _table.SERVING).filter(_table.ID_RECIPE == ID_RECIPE).all()
+
+            self.__recipe = self.qBase.toDict(select1)
+
+            return self.__recipe
+
+        try:
+            self.assertIsInstance(testIt(), list)
+
+            return self.qBase.toJsonRoute(str(self.__recipe), 200)
+        except AssertionError as ae:
+            error = 'Error on get recipe \n' + ae.args[0]
+            return self.qBase.toJsonRoute(error, 500)
 
     def __sendDataToAPI(self, data):
         url = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/visualizeRecipe"

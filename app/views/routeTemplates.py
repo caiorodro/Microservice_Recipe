@@ -111,3 +111,17 @@ def listOfRecipes():
     del data1
 
     return retorno
+
+@dataTemplate.route('/getRecipe', methods=['POST'])
+def getRecipe():
+    jsonData = json.loads(request.get_data())
+
+    idRecipe = jsonData['ID_RECIPE']
+    keep = jsonData['keep']
+    idUser = jsonData['idUser']
+
+    data1 = recipe(keep, idUser)
+    retorno = data1.getRecipe(idRecipe)
+    del data1
+
+    return retorno
