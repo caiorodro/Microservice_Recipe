@@ -12,7 +12,7 @@ class taskLogger(Resource):
         self.__loggerNoSQL = loggerNoSQL()
 
     def get(self):
-        
+
         data = request.get_json(force=True)
         date = data['date']
         start = data['start']
@@ -37,7 +37,7 @@ class taskLogger(Resource):
         kind = data['kind']
         excep = data['traceback']
         user = data['user']
-        
+
         try:
             self.__loggerNoSQL.insertLog(message, kind, excep, user)
 
