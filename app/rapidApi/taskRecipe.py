@@ -6,8 +6,8 @@ from app.views.responses import Responses
 from venv.config import Config
 import requests
 
-rapidAPIKey = "63facb4255mshb733c998f7d7f9bp128ac2jsn1587e6415a8b"
-rapidAPIHost = "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com"
+rapidAPIKey = "Your rapid API key"
+rapidAPIHost = "you rapid API host"
 
 class taskManageRecipe(Resource):
 
