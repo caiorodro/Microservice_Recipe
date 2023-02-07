@@ -50,7 +50,7 @@ configparser==3.7.4
 connexion==2.3.0
 contextlib2==0.5.5
 cripto==1.0a0
-cryptography==2.0.3
+cryptography==39.0.1
 cufflinks==0.12.1
 cycler==0.10.0
 cymem==2.0.2
